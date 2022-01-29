@@ -3,11 +3,13 @@ const fetchJSON = async (url) => {
     .then((res) => res.json())
     .then((data) => data)
     .catch((err) => err);
-  console.log(response);
   return response;
 };
 
-export const getProducts = () => {
-  console.log("getting");
-  return fetchJSON("https://fakestoreapi.com/products");
+export const getProducts = (append) => {
+  return fetchJSON(
+    append
+      ? `https://fakestoreapi.com/${append}`
+      : "https://fakestoreapi.com/products"
+  );
 };

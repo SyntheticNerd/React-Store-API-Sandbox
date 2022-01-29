@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getProducts } from "../utils/utils";
-import StarReviews from "./StarReviews";
+
+import ProductCard from "./ProductCard";
 
 import {
   ProductArrContainer,
@@ -10,14 +11,13 @@ import {
   PriceTag
 } from "../styles/StyleComp";
 
-export default function ProductArray() {
+export default function ProductArray({ url, setProductPage, setShowProduct }) {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    getProducts().then((res) => {
+    getProducts(url).then((res) => {
       setProducts(res);
-      console.log(res);
     });
-  }, []);
+  }, [url]);
 
   return (
     <>
@@ -25,14 +25,12 @@ export default function ProductArray() {
       <ProductArrContainer>
         {products.length &&
           products.map((data) => (
-            <>
-              <SmallContainer>
-                <Thumbnail url={data.image} />
-                <ProductTitleShort>{data.title}</ProductTitleShort>
-                <PriceTag>{`$${data.price.toFixed(2)}`}</PriceTag>
-                <StarReviews rating={data.rating} />
-              </SmallContainer>
-            </>
+            <ProductCard
+              key={data.id}
+              data={data}
+              setProductPage={setProductPage}
+              setShowProduct={setShowProduct}
+            />
           ))}
       </ProductArrContainer>
     </>
