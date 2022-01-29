@@ -1,19 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+const body = document.querySelector("body");
+
 const screenBlur = {
-  height: "100vh",
-  width: "100vw",
+  height: "inherit",
+  width: "100%",
   backgroundColor: "rgba(255, 255, 255, 0.3)",
   position: "absolute",
-  top: "0px",
-  zIndex: "2"
+  zIndex: "2",
+  top: "0",
+  bottom: "0",
+  left: "0",
+  right: "0",
+  overflow: "none"
 };
 
 const modalDefaultStyle = {
-  height: "95vh",
   width: "90vw",
-  backgroundColor: "#1e1e1e",
+  backgroundColor: "grey",
   borderRadius: ".2em",
   zIndex: "3",
   overflowX: "hidden",
@@ -33,6 +38,19 @@ const modalContainer = {
 };
 
 class ModalClass extends React.Component {
+  componentDidMount() {
+    console.log(this.props.show);
+    this.props.show
+      ? (body.style.overflow = "hidden")
+      : (body.style.overflow = "auto");
+  }
+  componentDidUpdate() {
+    console.log(this.props.show);
+    this.props.show
+      ? (body.style.overflow = "hidden")
+      : (body.style.overflow = "auto");
+  }
+
   render() {
     return (
       <>

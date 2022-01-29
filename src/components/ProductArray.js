@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { getProducts } from "../utils/utils";
-
 import ProductCard from "./ProductCard";
 
 import {

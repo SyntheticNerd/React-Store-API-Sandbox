@@ -11,7 +11,7 @@ export default function ProductPage({ url }) {
   }, [url]);
   return (
     <>
-      <p></p>
+      <p>{product.title}</p>
     </>
   );
 }

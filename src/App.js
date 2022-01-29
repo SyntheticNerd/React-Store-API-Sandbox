@@ -22,7 +22,7 @@ export default function App() {
         setShowProduct={setShowProduct}
       />
       <ModalClass show={showProduct} onClose={toggleProduct}>
-        <ProductPage onClose={toggleProduct} />
+        <ProductPage onClose={toggleProduct} url={productPage} />
       </ModalClass>
     </div>
   );
