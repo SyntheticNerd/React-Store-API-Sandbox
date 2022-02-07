@@ -7,23 +7,26 @@ const screenBlur = {
   height: "inherit",
   width: "100%",
   backgroundColor: "rgba(255, 255, 255, 0.3)",
-  position: "absolute",
+  // position: "-webkit-sticky",
+  position: "fixed",
   zIndex: "2",
-  top: "0",
-  bottom: "0",
+  yop: "0",
   left: "0",
-  right: "0",
   overflow: "none"
 };
 
 const modalDefaultStyle = {
-  width: "90vw",
-  backgroundColor: "grey",
+  width: "60vw",
+  height: "80vh",
+  backgroundColor: "white",
   borderRadius: ".2em",
   zIndex: "3",
   overflowX: "hidden",
-  position: "relative",
-  margin: "auto"
+  position: "fixed",
+  margin: "auto",
+  overflowY: "auto",
+  padding: "32px",
+  boxShadow: "2px 4px 4px rgba(0, 0, 0, 0.5)"
 };
 
 const modalContainer = {

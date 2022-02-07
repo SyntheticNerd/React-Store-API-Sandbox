@@ -1,36 +1,51 @@
 import React from "react";
 import { getProducts } from "../utils/utils";
+import { Thumbnail, CatBtn } from "../styles/StyleComp";
 
 class Catagories extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { categories: [], products: [] };
+    this.state = {
+      categories: [],
+      images: [
+        "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg",
+        "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
+        "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+        "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg"
+      ]
+    };
   }
   componentDidMount() {
-    getProducts("products/categories").then((res) =>
-      this.setState({ categories: res })
-    );
+    getProducts("products/categories").then((res) => {
+      this.setState({ categories: res });
+    });
   }
+  getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
   onClick = (category) => {
     let url = `products/category/${category}`;
     this.props.setUrl(url);
+    // this.getPicture(category);
   };
 
-  getPicture = (category) => {
-    getProducts(`products/category/${category}`);
-  };
   render() {
     return (
       <>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center"
+          }}
+        >
           {this.state.categories.map((category, index) => (
             <div key={index}>
-              <button
-                style={{ margin: "16px 8px" }}
-                onClick={() => this.onClick(category)}
-              >
+              <CatBtn onClick={() => this.onClick(category)}>
+                <Thumbnail url={this.state.images[index]} />
                 {category}
-              </button>
+              </CatBtn>
             </div>
           ))}
         </div>

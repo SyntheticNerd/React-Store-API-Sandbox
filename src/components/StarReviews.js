@@ -26,3 +26,4 @@ export default function StarReview({ rating }) {
     </>
   );
 }
+//interesting challenge to load the stars

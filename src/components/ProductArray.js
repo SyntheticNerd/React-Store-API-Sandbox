@@ -1,14 +1,7 @@
 import { useState, useEffect } from "react";
 import { getProducts } from "../utils/utils";
 import ProductCard from "./ProductCard";
-
-import {
-  ProductArrContainer,
-  Thumbnail,
-  SmallContainer,
-  ProductTitleShort,
-  PriceTag
-} from "../styles/StyleComp";
+import { ProductArrContainer } from "../styles/StyleComp";
 
 export default function ProductArray({ url, setProductPage, setShowProduct }) {
   const [products, setProducts] = useState([]);
@@ -19,19 +12,21 @@ export default function ProductArray({ url, setProductPage, setShowProduct }) {
   }, [url]);
 
   return (
-    <>
-      <p>Products</p>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <ProductArrContainer>
         {products.length &&
           products.map((data) => (
-            <ProductCard
-              key={data.id}
-              data={data}
-              setProductPage={setProductPage}
-              setShowProduct={setShowProduct}
-            />
+            <>
+              {/* <CartProductCard key={data.id} data={data} /> */}
+              <ProductCard
+                key={data.id}
+                data={data}
+                setProductPage={setProductPage}
+                setShowProduct={setShowProduct}
+              />
+            </>
           ))}
       </ProductArrContainer>
-    </>
+    </div>
   );
 }
