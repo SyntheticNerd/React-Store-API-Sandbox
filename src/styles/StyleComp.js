@@ -1,5 +1,18 @@
 import styled from "styled-components";
 
+export const NavBar = styled.nav`
+  position: sticky;
+  top: 0px;
+  display: flex;
+  width: 100%;
+  padding: 8px;
+  padding-right: 24px;
+  background: #2f2f2f;
+  color: white;
+  align-items: center;
+  z-index: 3;
+`;
+
 export const ProductArrContainer = styled.div`
   display: inline-flex;
   flex-wrap: wrap;
@@ -24,7 +37,6 @@ export const SmallContainer = styled.div`
   border-radius: 4px;
   background: white;
   box-shadow: 2px 2px 5px black;
-  overflow: none;
   opacity: 70%;
   transition: all 0.2s;
   position: relative;
@@ -171,16 +183,6 @@ export const QuantityField = styled.input`
   text-align: center;
 `;
 
-export const NavBar = styled.nav`
-  display: flex;
-  width: 100vw;
-  padding: 8px;
-  padding-right: 24px;
-  background: #2f2f2f;
-  color: white;
-  align-items: center;
-  z-index: 3;
-`;
 export const Link = styled.a`
   color: white;
   text-decoration: none;
@@ -278,7 +280,7 @@ export const CatBtn = styled.button`
     scale: 1.1;
     opacity: 100%;
   }
-  @media (max-width: 750px) {
+  @media (max-width: 780px) {
     width: 40vw;
   }
   @media (max-width: 410px) {

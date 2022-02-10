@@ -10,7 +10,7 @@ export default function Search() {
   return (
     <>
       <SearchBar>
-        <SBLabel for="searchBar">
+        <SBLabel htmlFor="searchBar">
           <HoverEffect>
             <SearchIcon />{" "}
           </HoverEffect>

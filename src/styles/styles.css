@@ -10,5 +10,5 @@
   text-align: center;
   background: #545454;
   min-height: 100vh;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }

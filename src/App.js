@@ -7,6 +7,7 @@ import Nav from "./components/Nav";
 import Cart from "./components/Cart";
 import { useState, useEffect } from "react";
 import ModalClass from "./components/Modal";
+import { Outlet } from "react-router-dom";
 
 export default function App() {
   const [url, setUrl] = useState("");
@@ -18,8 +19,9 @@ export default function App() {
   return (
     <div className="App">
       <Nav />
+      <Outlet />
       <Catagories setUrl={setUrl} />
-      <Cart url="/carts/5" />
+      {/* <Cart /> */}
       <ProductArray
         url={url}
         setProductPage={setProductPage}
