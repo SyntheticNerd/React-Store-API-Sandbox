@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getProducts } from "../utils/utils";
 import {
   CartCardContainer,
@@ -11,18 +11,21 @@ import {
 } from "../styles/StyleComp";
 import QuantityPicker from "./QuantityPicker";
 import DeleteBtn from "./DeleteBtn";
+import { CartContext } from "../context/CartContext";
 
 export default function CartProductCard({ productId, quantity }) {
-  const [newQuantity, setQuantity] = useState(1);
+  const [newQuantity, setQuantity] = useState(quantity ? quantity : 1);
   const [data, setData] = useState([]);
+  const { updateQtty } = useContext(CartContext);
+
   useEffect(() => {
-    setQuantity(quantity);
+    updateQtty(productId, newQuantity);
     async function loadArr() {
       let product = await getProducts(`/products/${productId}`);
       setData(product);
     }
     loadArr();
-  }, [productId, quantity]);
+  }, [productId, newQuantity, updateQtty]);
   return (
     <>
       {data.price && (
@@ -42,7 +45,7 @@ export default function CartProductCard({ productId, quantity }) {
             {data.title}
           </ProductTitleCart>
 
-          <QuantityPicker productId={productId} quantity={quantity} />
+          <QuantityPicker quantity={newQuantity} setQuantity={setQuantity} />
           <PriceContainer>
             <PriceTagSm>{`$${data.price.toFixed(2)}`}</PriceTagSm>
             <PriceTagMd>{`$${(data.price * newQuantity).toFixed(

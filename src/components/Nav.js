@@ -13,38 +13,41 @@ import {
 import CartBtn from "./CartBtn";
 import Search from "./Search";
 import { ReactComponent as ProfileIcon } from "../img/profile.svg";
-import { ReactComponent as SearchIcon } from "../img/search.svg";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
-export default function Nav() {
+export default function Nav({ url }) {
   const { cartQtty } = useContext(CartContext);
+  let navigate = useNavigate();
   return (
     <>
       <NavBar>
-        <NavIcon>Logo</NavIcon>
+        <NavIcon onClick={() => navigate("/")}>Logo</NavIcon>
         <DropDownCont>
-          <DropDownBtn href="#">Catagories</DropDownBtn>
+          <DropDownBtn>Catagories</DropDownBtn>
           <NavListCont>
             <Vl />
-            <NavLinkCont>
-              <Link href="#">Home</Link>
+            <NavLinkCont onClick={() => navigate("/")}>
+              <Link>Home</Link>
             </NavLinkCont>
             <Vl />
-            <NavLinkCont>
-              <Link href="#">Electronics</Link>
+            <NavLinkCont onClick={() => navigate("/catagory/electronics")}>
+              <Link>Electronics</Link>
             </NavLinkCont>
             <Vl />
-            <NavLinkCont>
-              <Link href="#">Jewelery</Link>
+            <NavLinkCont onClick={() => navigate("/catagory/jewelery")}>
+              <Link>Jewelery</Link>
             </NavLinkCont>
             <Vl />
-            <NavLinkCont>
-              <Link href="#">Men's Clothing</Link>
+            <NavLinkCont onClick={() => navigate("/catagory/men's%20clothing")}>
+              <Link>Men's Clothing</Link>
             </NavLinkCont>
             <Vl />
-            <NavLinkCont>
-              <Link href="#">Women's Clothing</Link>
+            <NavLinkCont
+              onClick={() => navigate("/catagory/women's%20clothing")}
+            >
+              <Link>Women's Clothing</Link>
             </NavLinkCont>
             <Vl />
           </NavListCont>
@@ -55,7 +58,9 @@ export default function Nav() {
             <ProfileIcon style={{ margin: "0px 8px" }} />
           </HoverEffect>
           <HoverEffect>
-            <CartBtn color="white" />
+            <span onClick={() => navigate("/cart")}>
+              <CartBtn color="white" />
+            </span>
           </HoverEffect>
           <p>{cartQtty}</p>
         </IconCont>

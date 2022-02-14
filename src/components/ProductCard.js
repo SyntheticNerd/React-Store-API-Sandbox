@@ -10,12 +10,16 @@ import {
   CardCartBtn
 } from "../styles/StyleComp";
 import { CartContext } from "../context/CartContext";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function ProductCard({ data, setProductPage, setShowProduct }) {
   const { addItem } = useContext(CartContext);
+  const navigate = useNavigate();
+
   let onClick = (id) => {
-    setProductPage(`products/${id}`);
-    setShowProduct(true);
+    navigate(`/products/${id}`);
+    // setProductPage(`products/${id}`);
+    // setShowProduct(true);
   };
   return (
     <>
@@ -30,7 +34,7 @@ export default function ProductCard({ data, setProductPage, setShowProduct }) {
           }}
           onClick={() => onClick(data.id)}
         ></div>
-        <CardCartBtn onClick={() => addItem(data.id, 1)}>
+        <CardCartBtn onClick={() => addItem(data, 1)}>
           <CartBtn />
         </CardCartBtn>
         <Thumbnail url={data.image} />

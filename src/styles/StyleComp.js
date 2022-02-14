@@ -23,32 +23,27 @@ export const ProductArrContainer = styled.div`
   &:after {
     width: fit-content;
   }
-  /* @media (max-width: 700px) {
-    padding: 0px;
-  } */
 `;
 //challenge I cant get this to do what I want it to
 
 export const SmallContainer = styled.div`
   width: 15em;
   height: 20em;
-  margin: 16px;
+  margin: 8px;
   padding: 16px;
-  border-radius: 4px;
+  border-radius: 2px;
   background: white;
   box-shadow: 2px 2px 5px black;
-  opacity: 70%;
+  opacity: 88%;
   transition: all 0.2s;
   position: relative;
   &:hover {
-    scale: 1.1;
+    scale: 1.05;
     opacity: 100%;
   }
-`;
-
-export const CardCartBtn = styled.button`
-  position: absolute;
-  right: 16px;
+  @media (max-width: 530px) {
+    width: 83%;
+  }
 `;
 
 //used a div instead of img to make use of background: url()
@@ -103,74 +98,17 @@ export const ProductTitleShort = styled.h2`
   overflow: hidden;
 `;
 
-export const ProductTitleCart = styled.h2`
-  font-weight: normal;
-  font-size: 0.9em;
-  line-height: 1.2em;
-  overflow: hidden;
-  flex: 1;
-  /* display: -webkit-box; */
-  /* -webkit-box-orient: vertical; */
-  /* -webkit-line-clamp: 2; */
-  /* there is an issue with webclamp i cant figure out 
-  the elipses will not populate on line 2 stay on line 1*/
-  height: 2.44em;
-  width: 45%;
-`;
-
 export const FrontStars = styled.div`
-  position: relative;
+  position: absolute;
+  top: 0px;
   overflow: hidden;
-  width: ${(props) => `${props.width}%`};
+  width: ${(props) => props.width && `${props.width}%`};
   height: 30px;
-`;
-
-export const CartCardContainer = styled.div`
-  background: white;
-  height: 4em;
-  width: 85%;
-  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 4px;
-  margin: 8px auto;
-  text-align: left;
-  @media (max-width: 700px) {
-    width: 100vw;
-    padding: 0;
-    margin: 8px 0px;
-    border-radius: 0px;
-  }
-`;
-
-export const CartImg = styled.img`
-  /* width: 4em; */
-  max-height: 3.5em;
-  max-width: 3.5em;
-`;
-
-export const DelBtnStyle = styled.button`
-  margin-left: 8px;
-  background: none;
-  border: none;
-  width: fit-content;
-  display: flex;
-  align-content: center;
-  border-radius: 50%;
-  box-shadow: ${(props) =>
-    props.shadow ? props.shadow : "0px 2px 2px rgba(0, 0, 0, 0.4)"};
-  &:hover {
-    box-shadow: ${(props) =>
-      props.shadow === "none"
-        ? props.shadow
-        : "0px 2px 2px rgba(255, 0, 0, 0.4)"};
-  }
 `;
 
 export const IncBtn = styled.button`
   width: 1.8em;
+  cursor: pointer;
   @media (max-width: 580px) {
     width: 0px;
     display: none;
@@ -179,15 +117,19 @@ export const IncBtn = styled.button`
 
 export const QuantityField = styled.input`
   width: 2em;
-  border: none;
+  border: 2px solid lightblue;
   text-align: center;
+  border-radius: 4px;
 `;
 
-export const Link = styled.a`
+export const Link = styled.button`
   color: white;
+  background: none;
+  border: none;
   text-decoration: none;
   line-height: 100%;
   font-size: 0.8em;
+  cursor: pointer;
 `;
 
 export const NavLinkCont = styled.li`
@@ -206,12 +148,15 @@ export const DropDownCont = styled.div`
     display: inline;
   }
 `;
-export const DropDownBtn = styled.a`
+export const DropDownBtn = styled.button`
   display: none;
   color: white;
   text-decoration: none;
   line-height: 100%;
   font-size: 0.8em;
+  background: none;
+  border: none;
+  cursor: pointer;
   @media (max-width: 790px) {
     display: inline;
   }
@@ -256,6 +201,7 @@ export const NavIcon = styled.button`
   border: none;
   background: none;
   color: white;
+  cursor: pointer;
 `;
 
 export const Vl = styled.div`
@@ -275,9 +221,10 @@ export const CatBtn = styled.button`
   border: none;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
   transition: all 0.2s;
-  opacity: 70%;
+  opacity: 88%;
+  cursor: pointer;
   &:hover {
-    scale: 1.1;
+    scale: 1.05;
     opacity: 100%;
   }
   @media (max-width: 780px) {
@@ -320,7 +267,7 @@ export const SearchBar = styled.div`
   transition: box-shadow 0s;
   z-index: 3;
   &:focus-within {
-    transition: box-shadow 0.5s;
+    transition: box-shadow 0.7s;
     position: absolute;
     margin-left: auto;
     transform: translate(-100%);
@@ -336,8 +283,7 @@ export const SearchBar = styled.div`
 export const SBLabel = styled.label`
   display: flex;
   align-items: center;
-  transition: opacity 1s;
-  /* margin-left: auto; */
+  cursor: pointer;
   ${SearchBar}:focus-within & {
     opacity: 50%;
     scale: 0.7;
@@ -349,8 +295,152 @@ export const HoverEffect = styled.div`
   align-items: center;
   opacity: 0.7;
   transition: all 0.2s;
+  cursor: pointer;
   &:hover {
     scale: 1.1;
     opacity: 1;
+  }
+`;
+
+export const ProductPgCont = styled.div`
+  /* min-height: 85vh; */
+  min-height: calc(100vh - 104px);
+  width: 100%;
+  background: white;
+  padding: 16px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+`;
+
+export const ProductImg = styled.div`
+  background: ${(props) =>
+    props.url ? `url(${props.url}) center/contain no-repeat` : "red"};
+  width: 100%;
+  height: 50vh;
+  margin-bottom: 8px;
+`;
+
+export const ProductDesc = styled.article`
+  text-align: left;
+`;
+
+export const CartPage = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  @media (max-width: 810px) {
+    width: 100%;
+    flex-direction: column;
+  }
+`;
+
+export const CartList = styled.div`
+  width: 70%;
+  margin-left: 8px;
+  @media (max-width: 810px) {
+    width: auto;
+    /* overflow: hidden; */
+  }
+`;
+
+export const CartCheckout = styled.div`
+  background: white;
+  flex: 1;
+  order: 1;
+  border-radius: 8px;
+  margin: 8px;
+  padding: 8px;
+  height: fit-content;
+  position: sticky;
+  top: 50px;
+  z-index: 3;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+  @media (max-width: 810px) {
+    order: 0;
+    /* width: 100%; */
+    flex-direction: column;
+  }
+`;
+
+export const CheckoutDet = styled.div`
+  @media (max-width: 810px) {
+    display: flex;
+    align-items: center;
+  }
+`;
+
+export const CartCardContainer = styled.div`
+  background: white;
+  height: 4em;
+  width: 100%;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 4px;
+  margin: 8px 0px;
+  text-align: left;
+  @media (max-width: 810px) {
+    width: calc(100% + 8px);
+    padding: 0;
+    margin: 8px 0px 8px -8px;
+    border-radius: 0px;
+  }
+`;
+
+export const CartImg = styled.img`
+  /* width: 4em; */
+  max-height: 3.5em;
+  max-width: 3.5em;
+`;
+
+export const ProductTitleCart = styled.h2`
+  font-weight: normal;
+  font-size: 0.9em;
+  line-height: 1.2em;
+  overflow: hidden;
+  flex: 1;
+  /* display: -webkit-box; */
+  /* -webkit-box-orient: vertical; */
+  /* -webkit-line-clamp: 2; */
+  /* there is an issue with webclamp i cant figure out 
+  the elipses will not populate on line 2 stay on line 1*/
+  height: 2.44em;
+  width: 45%;
+`;
+
+export const CardCartBtn = styled.button`
+  position: absolute;
+  right: 16px;
+  cursor: pointer;
+`;
+
+export const DelBtnStyle = styled.button`
+  margin-left: 8px;
+  background: none;
+  border: none;
+  width: fit-content;
+  display: flex;
+  align-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: ${(props) =>
+    props.shadow ? props.shadow : "0px 2px 2px rgba(0, 0, 0, 0.4)"};
+  &:hover {
+    box-shadow: ${(props) =>
+      props.shadow === "none"
+        ? props.shadow
+        : "0px 2px 2px rgba(255, 0, 0, 0.4)"};
+  }
+`;
+
+export const CheckoutBtn = styled.button`
+  padding: 4px;
+  width: 100%;
+  margin-bottom: 8px;
+  @media (max-width: 810px) {
+    width: fit-content;
+    margin: 0px;
+    margin-left
   }
 `;

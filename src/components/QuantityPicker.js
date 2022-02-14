@@ -1,14 +1,11 @@
-import { useState, useContext } from "react";
 import { IncBtn, QuantityField } from "../styles/StyleComp";
-import { CartContext } from "../context/CartContext";
 
-export default function QuantityPicker({ productId, quantity }) {
-  const { updateQtty } = useContext(CartContext);
+export default function QuantityPicker({ quantity, setQuantity }) {
   let increment = () => {
-    updateQtty(productId, quantity + 1);
+    setQuantity(quantity + 1);
   };
   let decrement = () => {
-    quantity > 1 && updateQtty(productId, quantity - 1);
+    quantity > 1 && setQuantity(quantity - 1);
   };
   return (
     <div style={{ margin: "0px 0px 0px auto" }}>
@@ -17,8 +14,7 @@ export default function QuantityPicker({ productId, quantity }) {
         type="text"
         value={quantity}
         onChange={(e) =>
-          updateQtty(
-            productId,
+          setQuantity(
             Number(e.currentTarget.value) ? Number(e.currentTarget.value) : ""
           )
         }

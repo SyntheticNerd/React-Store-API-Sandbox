@@ -1,6 +1,12 @@
 import React from "react";
 import { getProducts } from "../utils/utils";
 import { Thumbnail, CatBtn } from "../styles/StyleComp";
+import { useNavigate } from "react-router-dom";
+
+function withParams(Component) {
+  return (props) => <Component {...props} navigate={useNavigate()} />;
+}
+//challenge figure out how to use navigate with class components.
 
 class Catagories extends React.Component {
   constructor(props) {
@@ -25,8 +31,7 @@ class Catagories extends React.Component {
   }
 
   onClick = (category) => {
-    let url = `products/category/${category}`;
-    this.props.setUrl(url);
+    this.props.navigate(`/catagory/${category}`);
     // this.getPicture(category);
   };
 
@@ -41,7 +46,7 @@ class Catagories extends React.Component {
           }}
         >
           {this.state.categories.map((category, index) => (
-            <div key={index}>
+            <div key={`${index}${category}`}>
               <CatBtn onClick={() => this.onClick(category)}>
                 <Thumbnail url={this.state.images[index]} />
                 {category}
@@ -54,4 +59,4 @@ class Catagories extends React.Component {
   }
 }
 
-export default Catagories;
+export default withParams(Catagories);

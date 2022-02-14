@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getProducts } from "../utils/utils";
 
 const CartContext = React.createContext([]);
@@ -9,50 +9,73 @@ const CartProvider = ({ children }) => {
   const [user, setUser] = useState("");
   const [date, setDate] = useState("");
   const [cartQtty, setCartQtty] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    // debugger;
+    let _arr = JSON.parse(sessionStorage.getItem("guest"));
+    cartArr.length && cartArr.length === 0 && _arr.length && setCartArr(_arr);
+    saveToSession();
+    let _qtty = 0;
+    cartArr.map((data) => {
+      _qtty += data.quantity;
+    });
+    setCartQtty(_qtty);
+  }, [cartArr, saveToSession]);
+  //handleing a lot of sesion starrage stuff here
 
   function saveToSession() {
     // not for production use
-    sessionStorage.setItem(user, cartArr);
+    sessionStorage.setItem(user ? user : "guest", JSON.stringify(cartArr));
   }
-  async function loadArr(url) {
-    let _cart = await getProducts(url);
-    setCartArr(_cart.products);
-    setUser(_cart.userId);
-    setDate(_cart.date);
-  }
-  function addItem(productId, quantity) {
+  // async function loadArr(url) {
+  //   let _cart = await getProducts(url);
+  //   setCartArr(_cart.products);
+  //   setUser(_cart.userId);
+  //   setDate(_cart.date);
+  // }
+
+  function addItem(product, quantity) {
+    // debugger;
     let index = cartArr.findIndex((obj) => {
-      return obj.productId === productId;
+      // console.log(obj);
+      return obj.product.id === product.id;
     });
+    console.log(index);
     if (index + 1) {
       let _arr = cartArr;
-      _arr[index].quantity++;
-      setCartQtty(cartQtty + 1);
+      _arr[index].quantity += quantity;
+      setCartQtty(cartQtty + quantity);
+      setTotal(getTotal());
     } else {
-      setCartQtty(cartQtty + 1);
+      setCartQtty(cartQtty + quantity);
       setCartArr([
         ...cartArr,
         {
-          productId: productId,
+          product: product,
           quantity: quantity
         }
       ]);
+      setTotal(getTotal());
     }
   }
   function removeItem(productId) {
     let index = cartArr.findIndex((obj) => {
-      return obj.productId === productId;
+      return obj.product.id === productId;
     });
+    // console.log(cartArr);
     setCartQtty(cartQtty - cartArr[index].quantity);
+
     setCartArr(
-      cartArr.filter((n) => {
-        return n.productId !== productId;
+      cartArr.filter((item) => {
+        return item !== cartArr[index];
       })
     );
   }
   function updateQtty(productId, quantity) {
+    // debugger;
     let index = cartArr.findIndex((obj) => {
-      return obj.productId === productId;
+      return obj.product.id === productId;
     });
     let _arr = cartArr;
     let _qtty = cartQtty;
@@ -61,6 +84,15 @@ const CartProvider = ({ children }) => {
     _qtty += quantity;
     setCartArr(_arr);
     setCartQtty(_qtty);
+    setTotal(getTotal());
+  }
+
+  function getTotal() {
+    let total = 0;
+    for (let index in cartArr) {
+      total += cartArr[index].product.price * cartArr[index].quantity;
+    }
+    return total;
   }
 
   return (
@@ -68,11 +100,12 @@ const CartProvider = ({ children }) => {
       value={{
         setCartArr,
         cartArr,
-        loadArr,
+        // loadArr,
         addItem,
         cartQtty,
         removeItem,
-        updateQtty
+        updateQtty,
+        total
       }}
     >
       {children}
