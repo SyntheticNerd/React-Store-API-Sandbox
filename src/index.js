@@ -1,18 +1,19 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import { CartProvider } from "./context/CartContext";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
-import Cart from "./components/Cart";
-import App from "./App";
 import MyRouter from "./Router";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
-    <CartProvider>
-      <MyRouter />
-    </CartProvider>
+    <Provider store={store}>
+      <CartProvider>
+        <MyRouter />
+      </CartProvider>
+    </Provider>
   </StrictMode>,
   rootElement
 );

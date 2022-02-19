@@ -1,16 +1,15 @@
-import { useState, useEffect, useContext } from "react";
-import { getProducts } from "../utils/utils";
-import StarReviews from "./StarReviews";
-import CartBtn from "./CartBtn";
+import { useContext } from "react";
+import StarReviews from "../props/StarReviews";
+import CartBtn from "../props/CartBtn";
 import {
   Thumbnail,
   SmallContainer,
   ProductTitleShort,
   PriceTag,
   CardCartBtn
-} from "../styles/StyleComp";
-import { CartContext } from "../context/CartContext";
-import { useNavigate, useParams } from "react-router-dom";
+} from "../../styles/ProductStyle";
+import { CartContext } from "../../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductCard({ data, setProductPage, setShowProduct }) {
   const { addItem } = useContext(CartContext);
@@ -18,8 +17,6 @@ export default function ProductCard({ data, setProductPage, setShowProduct }) {
 
   let onClick = (id) => {
     navigate(`/products/${id}`);
-    // setProductPage(`products/${id}`);
-    // setShowProduct(true);
   };
   return (
     <>

@@ -1,19 +1,18 @@
 import { useState, useEffect, useContext } from "react";
-import { getProducts } from "../utils/utils";
-import StarReviews from "./StarReviews";
+import { getProducts } from "../../utils/utils";
+import StarReviews from "../props/StarReviews";
 import {
   ProductImg,
-  SmallContainer,
-  ProductTitleShort,
   PriceTag,
   ProductPgCont,
-  ProductDesc
-} from "../styles/StyleComp";
+  ProductDesc,
+  PageCartBtn
+} from "../../styles/ProductStyle";
 import { useParams } from "react-router-dom";
-import QuantityPicker from "./QuantityPicker";
-import CartBtn from "./CartBtn";
+import QuantityPicker from "../props/QuantityPicker";
+import CartBtn from "../props/CartBtn";
 import DietProdArray from "./DietProdArray";
-import { CartContext } from "../context/CartContext";
+import { CartContext } from "../../context/CartContext";
 
 export default function ProductPage({ url }) {
   const [product, setProduct] = useState({});
@@ -47,9 +46,9 @@ export default function ProductPage({ url }) {
                     setQuantity={setQuantity}
                   />
                 </div>
-                <button onClick={() => addItem(product, quantity)}>
+                <PageCartBtn onClick={() => addItem(product, quantity)}>
                   <CartBtn />
-                </button>
+                </PageCartBtn>
               </div>
               <StarReviews rating={product.rating} />
               <ProductDesc> {product.description} </ProductDesc>

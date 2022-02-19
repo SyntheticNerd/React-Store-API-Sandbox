@@ -1,8 +1,9 @@
 import React from "react";
-import { getProducts } from "../utils/utils";
-import { Thumbnail, CatBtn } from "../styles/StyleComp";
+import { getProducts } from "../../utils/utils";
+import { Thumbnail, CatBtn } from "../../styles/ProductStyle";
 import { useNavigate } from "react-router-dom";
 
+//--------------------Pass Router Dom Props
 function withParams(Component) {
   return (props) => <Component {...props} navigate={useNavigate()} />;
 }

@@ -1,5 +1,5 @@
-import { FrontStars } from "../styles/StyleComp";
-import { ReactComponent as Star } from "../img/star.svg";
+import { FrontStars } from "../../styles/StyleComp";
+import { ReactComponent as Star } from "../../img/star.svg";
 
 export default function StarReview({ rating }) {
   return (

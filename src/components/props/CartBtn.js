@@ -1,4 +1,4 @@
-import { ReactComponent as CartIcon } from "../img/cart.svg";
+import { ReactComponent as CartIcon } from "../../img/cart.svg";
 
 export default function CartBtn({ color }) {
   return (

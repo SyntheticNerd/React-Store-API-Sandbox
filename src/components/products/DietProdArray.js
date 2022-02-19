@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { getProducts } from "../utils/utils";
+import { getProducts } from "../../utils/utils";
 import ProductCard from "./ProductCard";
-import { ProductArrContainer } from "../styles/StyleComp";
+import { ProductArrContainer } from "../../styles/ProductStyle";
 import { useParams } from "react-router-dom";
 
 export default function DietProdArray({ url }) {
@@ -17,6 +17,8 @@ export default function DietProdArray({ url }) {
         });
   }, [url]);
 
+  //challenge display all the items except the one the page belongs to
+
   return (
     <>
       <h3 style={{ textAlign: "left", marginTop: "16px" }}>
@@ -27,11 +29,7 @@ export default function DietProdArray({ url }) {
           {products.length ? (
             products
               .filter((data) => `${data.id}` !== params.productId)
-              .map((data) => (
-                <>
-                  <ProductCard key={data.id} data={data} />
-                </>
-              ))
+              .map((data) => <ProductCard key={data.id} data={data} />)
           ) : (
             <></>
           )}
@@ -40,4 +38,3 @@ export default function DietProdArray({ url }) {
     </>
   );
 }
-//challenge display all the items except the one the page belongs to

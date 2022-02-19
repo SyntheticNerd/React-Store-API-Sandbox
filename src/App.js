@@ -1,6 +1,6 @@
 import "./styles/styles.css";
 import "./utils/utils";
-import Nav from "./components/Nav";
+import Nav from "./components/nav/Nav";
 import { Outlet } from "react-router-dom";
 
 export default function App() {
@@ -8,6 +8,7 @@ export default function App() {
     <div className="App">
       <Nav />
       <Outlet />
+      {/* Need to add a footer */}
     </div>
   );
 }

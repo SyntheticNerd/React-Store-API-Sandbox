@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
-import { getProducts } from "../utils/utils";
+import { useEffect } from "react";
 import CartProductCard from "./CartProductCard";
 import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { CartContext } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import {
   CartCheckout,
@@ -10,10 +9,9 @@ import {
   CartList,
   CheckoutDet,
   CheckoutBtn
-} from "../styles/StyleComp";
+} from "../../styles/CartStyle";
 
 export default function Cart({ url }) {
-  const [products, setProducts] = useState([]);
   const { cartArr, cartQtty, total } = useContext(CartContext);
   let navigate = useNavigate();
   useEffect(() => {

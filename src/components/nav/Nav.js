@@ -1,3 +1,4 @@
+import { HoverEffect } from "../../styles/StyleComp";
 import {
   NavBar,
   Link,
@@ -7,14 +8,13 @@ import {
   Vl,
   DropDownCont,
   DropDownBtn,
-  IconCont,
-  HoverEffect
-} from "../styles/StyleComp";
-import CartBtn from "./CartBtn";
+  IconCont
+} from "../../styles/NavStyle";
+import CartBtn from "../props/CartBtn";
 import Search from "./Search";
-import { ReactComponent as ProfileIcon } from "../img/profile.svg";
+import { ReactComponent as ProfileIcon } from "../../img/profile.svg";
 import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { CartContext } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Nav({ url }) {
@@ -55,7 +55,10 @@ export default function Nav({ url }) {
         <IconCont>
           <Search />
           <HoverEffect>
-            <ProfileIcon style={{ margin: "0px 8px" }} />
+            <ProfileIcon
+              onClick={() => navigate("/account")}
+              style={{ margin: "0px 8px" }}
+            />
           </HoverEffect>
           <HoverEffect>
             <span onClick={() => navigate("/cart")}>

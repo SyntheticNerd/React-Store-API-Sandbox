@@ -1,4 +1,4 @@
-import { IncBtn, QuantityField } from "../styles/StyleComp";
+import { IncBtn, QuantityField } from "../../styles/StyleComp";
 
 export default function QuantityPicker({ quantity, setQuantity }) {
   let increment = () => {
@@ -8,7 +8,7 @@ export default function QuantityPicker({ quantity, setQuantity }) {
     quantity > 1 && setQuantity(quantity - 1);
   };
   return (
-    <div style={{ margin: "0px 0px 0px auto" }}>
+    <div style={{ margin: "0px 0px 0px auto", zIndex: "1" }}>
       <IncBtn onClick={increment}>↑</IncBtn>
       <QuantityField
         type="text"

@@ -13,21 +13,24 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     // debugger;
-    let _arr = JSON.parse(sessionStorage.getItem("guest"));
-    cartArr.length && cartArr.length === 0 && _arr.length && setCartArr(_arr);
-    saveToSession();
+    function saveToSession() {
+      // not for production use
+      sessionStorage.setItem(user ? user : "guest", JSON.stringify(cartArr));
+    }
+    let _arr = JSON.parse(sessionStorage.getItem("guest"))
+      ? JSON.parse(sessionStorage.getItem("guest"))
+      : [];
+    !cartArr.length && _arr.length && setCartArr(_arr);
     let _qtty = 0;
     cartArr.map((data) => {
       _qtty += data.quantity;
+      saveToSession();
     });
     setCartQtty(_qtty);
-  }, [cartArr, saveToSession]);
+    setTotal(getTotal());
+  }, [cartArr, user, cartQtty, getTotal]);
   //handleing a lot of sesion starrage stuff here
 
-  function saveToSession() {
-    // not for production use
-    sessionStorage.setItem(user ? user : "guest", JSON.stringify(cartArr));
-  }
   // async function loadArr(url) {
   //   let _cart = await getProducts(url);
   //   setCartArr(_cart.products);
@@ -38,10 +41,8 @@ const CartProvider = ({ children }) => {
   function addItem(product, quantity) {
     // debugger;
     let index = cartArr.findIndex((obj) => {
-      // console.log(obj);
       return obj.product.id === product.id;
     });
-    console.log(index);
     if (index + 1) {
       let _arr = cartArr;
       _arr[index].quantity += quantity;
@@ -63,7 +64,6 @@ const CartProvider = ({ children }) => {
     let index = cartArr.findIndex((obj) => {
       return obj.product.id === productId;
     });
-    // console.log(cartArr);
     setCartQtty(cartQtty - cartArr[index].quantity);
 
     setCartArr(
@@ -73,7 +73,6 @@ const CartProvider = ({ children }) => {
     );
   }
   function updateQtty(productId, quantity) {
-    // debugger;
     let index = cartArr.findIndex((obj) => {
       return obj.product.id === productId;
     });
